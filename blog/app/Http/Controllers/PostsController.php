@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\post;
+use App\Models\Categoria;
 
 class PostsController extends Controller
 {
@@ -10,9 +12,12 @@ class PostsController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        return view('admin.posts');
+        $posts =Post::all();
+        return view('admin.posts')->with('posts',$posts);
     }
     public function showAdd(){
-        return view('admin.post_add');
+        $categories= Categoria::all();
+        return view('admin.post_add')
+            ->with('categories',$categories);
     }
 }
